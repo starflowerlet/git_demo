@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{{super}}
+
+{% import "page_.html" as macros %}
+{%block title  %}首页{% endblock %}
+
+{%block head  %}
+	<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{%block main %}
+<script>
+  document.getElementById("User").innerHTML="{{user.username}}";
+</script>
+
+<ul class="question-list-group">
+{% for question in questions %}
+	<li>
+		<div class="avatar-group">
+			<img src="{{url_for('static',filename='images/zhiliao.png')}}" alt="" class="avatar">
+		</div>
+		<div class="question-group">
+			<p class="question-title"><a href="{{url_for('detail',question_id=question.id)}}">{{question.title}}</a></p>
+			{% for tag in question.tags.split(',') %}
+			<span class="label label-info"><a href="{{url_for('tag_search',tag_name=tag)}}">{{tag}}</a></span>
+			{% endfor %}
+			<p class="question-content">{{question.content}}</p>
+			<div class="question-info">
+				<span class="question-author">{{question.author.username}}</span>
+				<span class="question-time">{{question.create_time}}</span>
+			</div>
+		</div>
+	</li>
+{% endfor %}
+	<div class="pagination">
+		{{ macros.pagination_widget(pagination,'.index_login')}}
+	</div>
+</ul>
+{% endblock %}

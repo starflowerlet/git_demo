@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{%block title  %}注册{% endblock %}
+
+{%block head  %}
+	<link rel="stylesheet" href="{{url_for('static',filename='css/user.css')}}">
+{% endblock %}
+
+{%block main %}
+	<h3 class="page-title">{{user.username}}</h3>
+	<ul class="list-group">
+      <li class="list-group-item">真实姓名： {{user.name}}</li>
+      <li class="list-group-item">所在地：  {{user.location}}</li>
+      <li class="list-group-item">一句话描述：    {{user.about_me}}</li>
+    </ul>
+{% endblock %}
+
